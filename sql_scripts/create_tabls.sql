@@ -1,5 +1,7 @@
--- This table is about the details of authors of books in the library
+# Author : Sruthi Gujja
+# Date Created : 06-01-2017
 
+-- This table is about the details of authors of books in the library
 CREATE TABLE author 
   ( 
      authorid    INTEGER(255) COMMENT "id of the author",
@@ -10,18 +12,16 @@ CREATE TABLE author
      PRIMARY KEY(authorid)    COMMENT "primary key of the table is author id"
   ); 
 
--- This table gives list of all the books in library
-  
+-- This table gives list of all the books in library  
 CREATE TABLE books 
   ( 
      id         INTEGER(255) COMMENT "id of the book",
      title      VARCHAR(20) COMMENT "title of the book",
      copies     INTEGER(255) COMMENT "number of copies of each book", 
-     bookstaken INTEGER(255) COMMENT "number of copies of each book taken by the students",
      PRIMARY KEY(id)         COMMENT "primary key of the table is book id"
-  ); 
+  );
+  
 -- This table gives the details of the students in the college
-
 CREATE TABLE student 
   ( 
      stid       INTEGER(255) COMMENT "id of a student",
@@ -36,7 +36,6 @@ CREATE TABLE student
   ); 
 
 -- This table is about the books and their authors  
-
 CREATE TABLE bookauthor 
   ( 
      book_id       INTEGER  COMMENT "id of the book which is primary key in table books",
@@ -47,8 +46,7 @@ CREATE TABLE bookauthor
      
   ); 
 
--- This table is about the details of the books issued to the students
-  
+-- This table is about the details of the books issued to the students  
 CREATE TABLE issued 
   ( 
      st_id        INTEGER(255)  COMMENT "id of the student which is primary key in table student",
@@ -61,8 +59,7 @@ CREATE TABLE issued
      PRIMARY KEY(st_id, book_id) COMMENT "composite primary key is student id and book id" 
   ); 
   
--- This table gives the details of the staff in the library
-  
+-- This table gives the details of the staff in the library  
 CREATE TABLE staff 
   ( 
      staffid     INTEGER(255) COMMENT "id of the employee",
