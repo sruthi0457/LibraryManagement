@@ -1,60 +1,72 @@
+--This table is about the details of authors of books in the library
+
 CREATE TABLE author 
   ( 
-     authorid    INTEGER(255), 
-     afirstname  VARCHAR(20), 
-     amiddlename VARCHAR(20), 
-     alastname   VARCHAR(20), 
-     contact     INTEGER(255), 
-     PRIMARY KEY(authorid) 
+     authorid    INTEGER(255) COMMENT "id of the author",
+     afirstname  VARCHAR(20) COMMENT "first name of the author",
+     amiddlename VARCHAR(20) COMMENT "middle name of the author",
+     alastname   VARCHAR(20) COMMENT "last name of the author",
+     contact     INTEGER(255) COMMENT "phone number of the author",
+     PRIMARY KEY(authorid)    COMMENT "primary key of the table is author id"
   ); 
 
+--This table gives list of all the books in library
+  
 CREATE TABLE books 
   ( 
-     id         INTEGER(255), 
-     title      VARCHAR(20), 
-     copies     INTEGER(255), 
-     bookstaken INTEGER(255), 
-     PRIMARY KEY(id) 
+     id         INTEGER(255) COMMENT "id of the book",
+     title      VARCHAR(20) COMMENT "title of the book",
+     copies     INTEGER(255) COMMENT "number of copies of each book", 
+     bookstaken INTEGER(255) COMMENT "number of copies of each book taken by the students",
+     PRIMARY KEY(id)         COMMENT "primary key of the table is book id"
   ); 
+--This table gives the details of the students in the college
 
 CREATE TABLE student 
   ( 
-     stid       INTEGER(255), 
-     firstname  VARCHAR(20), 
-     middlename VARCHAR(20), 
-     lastname   VARCHAR(20), 
-     contact    INTEGER(255), 
-     mailid     VARCHAR(40), 
-     password   VARCHAR(40), 
-     department VARCHAR(20), 
-     PRIMARY KEY(stid) 
+     stid       INTEGER(255) COMMENT "id of a student",
+     firstname  VARCHAR(20) COMMENT "first name of the student",
+     middlename VARCHAR(20) COMMENT "middle name of the student",
+     lastname   VARCHAR(20) COMMENT "last name of the student",
+     contact    INTEGER(255) COMMENT "phone number of the student",
+     mailid     VARCHAR(40) COMMENT "email address of the student",
+     password   VARCHAR(40) COMMENT "password of the email of the student",
+     department VARCHAR(20) COMMENT "department of the student",
+     PRIMARY KEY(stid)      COMMENT "primary key of the table is student id"
   ); 
-  
+
+--This table is about the books and their authors  
+
 CREATE TABLE bookauthor 
   ( 
-     id       INTEGER REFERENCES books(id), 
-     authorid INTEGER REFERENCES author(authorid), 
-     PRIMARY KEY(id, authorid) 
-  ); 
+     id       INTEGER REFERENCES books(id) COMMENT "id of the book which is primary key in table books",
+     authorid INTEGER REFERENCES author(authorid) COMMENT "id of the author which is primary key in table author", 
+     PRIMARY KEY(id, authorid) COMMENT "composite primary key is book id and author id"
+     ); 
+
+--This table is about the details of the books issued to the students
   
 CREATE TABLE issued 
   ( 
-     stid        INTEGER(255) REFERENCES student(stid), 
-     id          INTEGER(255) REFERENCES books(id), 
-     issuedate   DATE, 
-     returndate  DATE, 
-     renewaldate DATE, 
-     PRIMARY KEY(stid, id) 
+     stid        INTEGER(255) REFERENCES student(stid) COMMENT "id of the student which is primary key in table student",
+     id          INTEGER(255) REFERENCES books(id) COMMENT "id of the book which is primary key in table books",
+     issuedate   DATE COMMENT "date on which book is issued to the book",
+     returndate  DATE COMMENT "date on which student should return the book",
+     renewaldate DATE COMMENT "date of renewal of the book",
+     PRIMARY KEY(stid, id) COMMENT "composite primary key is student id and book id" 
   ); 
+  
+--This table gives the details of the staff in the library
+  
 CREATE TABLE staff 
   ( 
-     staffid     INTEGER(255), 
-     sfirstname  VARCHAR(20), 
-     smiddlename VARCHAR(20), 
-     slastname   VARCHAR(20), 
-     userid      INTEGER(255), 
-     spassword   VARCHAR(40), 
-     designation VARCHAR(20), 
-     PRIMARY KEY(staffid) 
+     staffid     INTEGER(255) COMMENT "id of the employee",
+     sfirstname  VARCHAR(20) COMMENT "first name of the employee",
+     smiddlename VARCHAR(20) COMMENT "middle name of the employee",
+     slastname   VARCHAR(20) COMMENT "last name of the employee",
+     userid      INTEGER(255) COMMENT "user id of the employee to log in",
+     spassword   VARCHAR(40) COMMENT "password of the employee to log in",
+     designation VARCHAR(20) COMMENT "designation of the employee",
+     PRIMARY KEY(staffid)    COMMENT "primary key of the table is id of the staff"
   ); 
 
