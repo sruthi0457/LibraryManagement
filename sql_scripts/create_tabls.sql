@@ -1,4 +1,4 @@
---This table is about the details of authors of books in the library
+-- This table is about the details of authors of books in the library
 
 CREATE TABLE author 
   ( 
@@ -10,7 +10,7 @@ CREATE TABLE author
      PRIMARY KEY(authorid)    COMMENT "primary key of the table is author id"
   ); 
 
---This table gives list of all the books in library
+-- This table gives list of all the books in library
   
 CREATE TABLE books 
   ( 
@@ -20,7 +20,7 @@ CREATE TABLE books
      bookstaken INTEGER(255) COMMENT "number of copies of each book taken by the students",
      PRIMARY KEY(id)         COMMENT "primary key of the table is book id"
   ); 
---This table gives the details of the students in the college
+-- This table gives the details of the students in the college
 
 CREATE TABLE student 
   ( 
@@ -35,28 +35,33 @@ CREATE TABLE student
      PRIMARY KEY(stid)      COMMENT "primary key of the table is student id"
   ); 
 
---This table is about the books and their authors  
+-- This table is about the books and their authors  
 
 CREATE TABLE bookauthor 
   ( 
-     id       INTEGER REFERENCES books(id) COMMENT "id of the book which is primary key in table books",
-     authorid INTEGER REFERENCES author(authorid) COMMENT "id of the author which is primary key in table author", 
-     PRIMARY KEY(id, authorid) COMMENT "composite primary key is book id and author id"
-     ); 
+     book_id       INTEGER  COMMENT "id of the book which is primary key in table books",
+     author_id INTEGER  COMMENT "id of the author which is primary key in table author", 
+     FOREIGN KEY(book_id) REFERENCES books(id),
+     FOREIGN KEY(author_id) REFERENCES author(authorid),
+     PRIMARY KEY(book_id, author_id) COMMENT "composite primary key is book id and author id"
+     
+  ); 
 
---This table is about the details of the books issued to the students
+-- This table is about the details of the books issued to the students
   
 CREATE TABLE issued 
   ( 
-     stid        INTEGER(255) REFERENCES student(stid) COMMENT "id of the student which is primary key in table student",
-     id          INTEGER(255) REFERENCES books(id) COMMENT "id of the book which is primary key in table books",
+     st_id        INTEGER(255)  COMMENT "id of the student which is primary key in table student",
+     book_id          INTEGER(255) COMMENT "id of the book which is primary key in table books",
      issuedate   DATE COMMENT "date on which book is issued to the book",
      returndate  DATE COMMENT "date on which student should return the book",
      renewaldate DATE COMMENT "date of renewal of the book",
-     PRIMARY KEY(stid, id) COMMENT "composite primary key is student id and book id" 
+     FOREIGN KEY(st_id) REFERENCES student(stid),
+     FOREIGN KEY(book_id) REFERENCES books(id),
+     PRIMARY KEY(st_id, book_id) COMMENT "composite primary key is student id and book id" 
   ); 
   
---This table gives the details of the staff in the library
+-- This table gives the details of the staff in the library
   
 CREATE TABLE staff 
   ( 
